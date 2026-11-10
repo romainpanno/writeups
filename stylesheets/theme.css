@@ -1,0 +1,120 @@
+/* Compléments au thème Zensical « modern » (style zensical.org), valables en clair et en sombre.
+   Les couleurs, polices et arrondis de base viennent du thème : ne rien redéfinir ici sans raison. */
+
+:root {
+  --wu-radius: 0.4rem;                 /* arrondi des encadrés du thème modern */
+  --wu-green: #1f9d55;
+  --wu-yellow: #b7791f;
+  --wu-red: #d64545;
+  --wu-purple: #7c5cd6;
+}
+
+[data-md-color-scheme="slate"] {
+  --wu-green: #4ade80;
+  --wu-yellow: #fbbf24;
+  --wu-red: #f87171;
+  --wu-purple: #b9a3f5;
+}
+
+/* ---------------------------------------------------------------- arrondis là où le thème reste carré */
+.md-typeset table:not([class]) {
+  border-radius: var(--wu-radius);
+  overflow: hidden;
+}
+
+.md-typeset img {
+  border-radius: var(--wu-radius);
+}
+
+.md-typeset .mermaid {
+  border-radius: var(--wu-radius);
+}
+
+/* Tableau dont l'en-tête est vide (tableau d'infos clé/valeur) : on masque la ligne d'en-tête */
+.md-typeset table:not([class]) thead:not(:has(th:not(:empty))) {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- tableau de suivi */
+.wu-tracker td:nth-child(4),
+.wu-tracker td:nth-child(5) {
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- icônes de statut (champ `status`) */
+:root {
+  --md-status--active: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17a2 2 0 0 0 2-2 2 2 0 0 0-2-2 2 2 0 0 0-2 2 2 2 0 0 0 2 2m6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5 5 5 0 0 1 5 5v2zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3"/></svg>');
+  --md-status--retired: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7 9 19l-5.5-5.5 1.41-1.41L9 16.17 19.59 5.59z"/></svg>');
+}
+
+.md-status--active::after {
+  -webkit-mask-image: var(--md-status--active);
+  mask-image: var(--md-status--active);
+  background-color: var(--wu-yellow);
+}
+
+.md-status--retired::after {
+  -webkit-mask-image: var(--md-status--retired);
+  mask-image: var(--md-status--retired);
+  background-color: var(--wu-green);
+}
+
+/* ---------------------------------------------------------------- vue d'ensemble : chiffres clés */
+.md-typeset .wu-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
+  gap: 0.6rem;
+  margin: 1em 0 0.4em;
+}
+
+.md-typeset .wu-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.85rem;
+  background-color: color-mix(in srgb, var(--md-primary-fg-color) 12%, transparent);
+  border-radius: var(--wu-radius);
+}
+
+.md-typeset .wu-stat__value {
+  color: var(--md-default-fg-color);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;   /* une date ne doit pas se couper au tiret */
+}
+
+.md-typeset .wu-stat__label {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.md-typeset .wu-meta {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.68rem;
+  margin: 0 0 1em;
+}
+
+/* ---------------------------------------------------------------- badges (statut, difficulté) */
+.md-typeset .wu-badge {
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+  --wu-badge: var(--md-default-fg-color--light);
+  color: var(--wu-badge);
+  background-color: color-mix(in srgb, var(--wu-badge) 14%, transparent);
+}
+
+.md-typeset .wu-badge--status-active   { --wu-badge: var(--wu-yellow); }
+.md-typeset .wu-badge--status-retired  { --wu-badge: var(--wu-green); }
+.md-typeset .wu-badge--diff-easy       { --wu-badge: var(--wu-green); }
+.md-typeset .wu-badge--diff-medium     { --wu-badge: var(--wu-yellow); }
+.md-typeset .wu-badge--diff-hard       { --wu-badge: var(--wu-red); }
+.md-typeset .wu-badge--diff-insane     { --wu-badge: var(--wu-purple); }
